@@ -2,7 +2,10 @@
 Adim 1 - Ingilizce -> Turkce ceviri cekirdegi.
 
 Onkosul: Ollama kurulu ve calisiyor olmali.
-    ollama pull gemma3:4b     (veya gemma3:1b)
+    ollama pull gemma3:1b     (veya istedigin baska bir model)
+
+Yerel model OLLAMA_MODEL ortam degiskeninden okunur; tanimli degilse
+gemma3:1b kullanilir.
 
 Calistirmak icin:
     python engine.py
@@ -12,6 +15,7 @@ providers.py ve arayuz tarafindan cagrilmak.
 """
 
 import json
+import os
 import time
 import urllib.error
 import urllib.request
@@ -20,7 +24,10 @@ from datetime import datetime
 from paths import HISTORY_DIR
 
 OLLAMA_URL = "http://localhost:11434/api/chat"
-MODEL = "gemma3:1b"
+DEFAULT_MODEL = "gemma3:1b"
+# Ollama'da kurulu herhangi bir model kullanilabilir. Kod belirli bir
+# modele bagli degil; ad ortam degiskeninden gelir.
+MODEL = os.environ.get("OLLAMA_MODEL", "").strip() or DEFAULT_MODEL
 
 SYSTEM_PROMPT = """Sen İngilizceden Türkçeye çeviri yapan bir çevirmensin.
 

@@ -55,9 +55,20 @@ uv sync
 
 **2. Yerel modeli indir**
 
+Yerel çeviri için Ollama'da kurulu herhangi bir model kullanılabilir. Varsayılan `gemma3:1b`:
+
 ```powershell
 ollama pull gemma3:1b
 ```
+
+Başka bir model kullanmak için onu indirin ve adını `OLLAMA_MODEL` ortam değişkenine yazın:
+
+```powershell
+ollama pull <model-adı>
+[Environment]::SetEnvironmentVariable("OLLAMA_MODEL", "<model-adı>", "User")
+```
+
+Değişken tanımlı değilse `gemma3:1b` kullanılır. Seçilen model, penceredeki model kutusunda `Local - <model-adı>` olarak görünür. Değişikliğin geçerli olması için terminali ve uygulamayı yeniden başlatın.
 
 **3. Bulut sağlayıcı için API anahtarı tanımla (isteğe bağlı)**
 

@@ -22,6 +22,7 @@ from typing import Callable, Protocol
 
 from engine import (
     GLOSSARY,
+    MODEL,
     SYSTEM_PROMPT,
     TranslationError,
     build_prompt,
@@ -168,7 +169,7 @@ class GeminiTranslator:
 # secilen kurulsun. Boylece Gemini secilmedigi surece anahtar
 # aranmaz ve anahtar yoksa bile yerel ceviri sorunsuz calisir.
 PROVIDERS: dict[str, Callable[[], Translator]] = {
-    "Local - gemma3:1b": lambda: OllamaTranslator("gemma3:1b"),
+    f"Local - {MODEL}": lambda: OllamaTranslator(MODEL),
     "Cloud - Gemini Flash": lambda: GeminiTranslator("gemini-3.6-flash"),
 }
 
