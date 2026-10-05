@@ -84,7 +84,7 @@ class TranslatorWindow(QWidget):
         self._build_ui()
 
     def _build_ui(self) -> None:
-        self.setWindowTitle("Ceviri Agenti")
+        self.setWindowTitle("Tray Translator")
         self.resize(640, 480)
 
         self.model_box = QComboBox()

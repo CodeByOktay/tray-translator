@@ -35,7 +35,7 @@ HOTKEY_LABEL = "Alt+T"
 
 # Yerel soketin adi. Bilgisayarda benzersiz olmali; baska bir
 # programin ayni adi kullanma ihtimali dusuk olsun diye uzun tuttuk.
-SERVER_NAME = "ceviri-agenti-tek-ornek-v1"
+SERVER_NAME = "tray-translator-tek-ornek-v1"
 
 
 class HotkeyBridge(QObject):
@@ -189,7 +189,7 @@ def main() -> None:
     app.aboutToQuit.connect(server.close)
 
     tray = QSystemTrayIcon(build_icon(), parent=app)
-    tray.setToolTip(f"Ceviri Agenti  ({HOTKEY_LABEL})")
+    tray.setToolTip(f"Tray Translator  ({HOTKEY_LABEL})")
 
     menu = QMenu()
 
@@ -214,7 +214,7 @@ def main() -> None:
     tray.activated.connect(on_tray_activated)
 
     tray.showMessage(
-        "Ceviri Agenti calisiyor",
+        "Tray Translator calisiyor",
         f"{HOTKEY_LABEL} ile pencereyi acabilirsiniz.",
         QSystemTrayIcon.MessageIcon.Information,
         3000,

@@ -1,4 +1,4 @@
-# Çeviri Agent'ı
+# Tray Translator
 
 Masaüstünde arka planda çalışan, kısayolla çağrılan İngilizce → Türkçe çeviri aracı. Çeviriyi ister bilgisayarda yerel olarak çalışan bir dil modeliyle, ister bulut API'si üzerinden yapar.
 
@@ -99,10 +99,10 @@ uv run pythonw main.py
 Derlenmiş `.exe` depoda bulunmaz; kaynak koddan PyInstaller ile üretilir:
 
 ```powershell
-uv run pyinstaller CeviriAgenti.spec
+uv run pyinstaller tray-translator.spec
 ```
 
-Çıktı `dist\CeviriAgenti\` klasörüne yazılır; çalıştırılacak dosya `dist\CeviriAgenti\CeviriAgenti.exe`. Klasörün tamamı birlikte taşınmalıdır (`_internal` klasörü `.exe` için gereklidir). Paketlenmiş uygulama `logs` ve `gecmis` klasörlerini `.exe` dosyasının yanında oluşturur.
+Çıktı `dist\tray-translator\` klasörüne yazılır; çalıştırılacak dosya `dist\tray-translator\tray-translator.exe`. Klasörün tamamı birlikte taşınmalıdır (`_internal` klasörü `.exe` için gereklidir). Paketlenmiş uygulama `logs` ve `gecmis` klasörlerini `.exe` dosyasının yanında oluşturur.
 
 ## Kullanım
 
@@ -127,7 +127,7 @@ tray-translator/
 ├── paths.py         Paketlenmiş ve paketlenmemiş çalışmada doğru klasör yolları
 ├── pyproject.toml   Proje tanımı ve bağımlılıklar
 ├── uv.lock          Kilitlenmiş bağımlılık sürümleri
-├── CeviriAgenti.spec  PyInstaller derleme tarifi
+├── tray-translator.spec  PyInstaller derleme tarifi
 ├── docs/            Mimari çizimi
 ├── logs/            Teknik kayıtlar (hata.log)
 └── gecmis/          Çeviri arşivi (cikti_YYYY-MM-DD.txt) (Terminalden çalıştırılanları içerir.Terminalden çalıştırmadığında arşiv kaydı yapılmaz.)
