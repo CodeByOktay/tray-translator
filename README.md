@@ -12,7 +12,7 @@ Model seçim kutusundan iki sağlayıcı arasında geçiş yapılabilir: Yerel O
 
 ## Ekran görüntüsü
 
-Ekran görüntüsü ileride eklenecek.
+![Tray Translator penceresi](docs/ekran.png)
 
 ## Özellikler
 
