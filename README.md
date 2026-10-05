@@ -16,7 +16,7 @@ Ekran görüntüsü ileride eklenecek.
 
 ## Özellikler
 
-- Arka planda çalışma, sistem tepsisi ikonu, Windows açılışında otomatik başlama
+- Arka planda çalışma, sistem tepsisi ikonu; Windows açılışında başlatma elle ayarlanır ([aşağıda](#windows-açılışında-başlatma))
 - Global kısayol (`Alt+T`) ile aç/gizle
 - Yerel (offline) ve bulut sağlayıcılar arasında anlık geçiş
 - Terim sözlüğü: belirlenen terimlerin karşılıkları modele dayatılır
@@ -120,6 +120,41 @@ uv run pyinstaller tray-translator.spec
 
 Çıktı `dist\tray-translator\` klasörüne yazılır; çalıştırılacak dosya `dist\tray-translator\tray-translator.exe`. Klasörün tamamı birlikte taşınmalıdır (`_internal` klasörü `.exe` için gereklidir). Paketlenmiş uygulama `logs` ve `gecmis` klasörlerini `.exe` dosyasının yanında oluşturur.
 
+## Kurulumdan sonra
+
+**Sistem tepsisi.** Ayrı bir ayar gerekmez; uygulama çalıştığında tepsiye yerleşir (mavi kare içinde "TR" ikonu) ve bir bildirim gösterir. İkon görünmüyorsa Windows onu gizli simgeler (`^`) altına almıştır. Hep görünmesi için: Ayarlar → Kişiselleştirme → Görev çubuğu → Diğer sistem tepsisi simgeleri (Windows 10'da "Görev çubuğunda görünecek simgeleri seçin").
+
+**Ortam değişkenleri.** Hiçbiri zorunlu değildir; tanımlandıktan sonra terminali ve uygulamayı yeniden başlatın.
+
+| Değişken | Ne işe yarar | Tanımlı değilse |
+|---|---|---|
+| `GEMINI_API_KEY` | Bulut çevirisi için API anahtarı | Bulut sağlayıcı hata verir, yerel sağlayıcı çalışır |
+| `OLLAMA_MODEL` | Yerel çeviride kullanılacak Ollama modeli | `gemma3:1b` |
+| `GEMINI_MODEL` | Bulut çevirisinde kullanılacak Gemini modeli | `gemini-3.6-flash` |
+
+Bir değişkenin tanımlı olup olmadığına bakmak için:
+
+```powershell
+[Environment]::GetEnvironmentVariable("OLLAMA_MODEL", "User")
+```
+
+**Ollama.** Yerel çeviri için Ollama arka planda çalışıyor olmalıdır. `ollama list` kurulu modelleri gösteriyorsa çalışıyordur.
+
+### Windows açılışında başlatma
+
+Uygulama kendini açılışa eklemez; Windows'un Başlangıç klasörüne bir kısayol koyarak elle yapılır:
+
+1. `.exe` dosyasını derleyin (yukarıdaki [.exe derleme](#exe-derleme) bölümü).
+2. `Win+R` tuşlarına basın, `shell:startup` yazıp Enter'a basın; Başlangıç klasörü açılır.
+3. `dist\tray-translator\tray-translator.exe` dosyasına sağ tıklayıp kısayol oluşturun ve kısayolu bu klasöre taşıyın.
+
+Kaldırmak için kısayolu silmek yeterlidir. `.exe` klasörü taşınırsa kısayol yeniden oluşturulmalıdır.
+
+### Sorun giderme
+
+- Konsolsuz çalışmada hatalar `logs\hata.log` dosyasına yazılır. Hatayı doğrudan görmek için `uv run main.py` ile konsollu çalıştırın.
+- Uygulama açılmıyor gibi görünüyorsa zaten çalışıyor olabilir: ikinci kez başlatıldığında yeni örnek açmaz, var olan pencereyi öne getirir. Tepsiye bakın.
+- "Ollama'ya baglanilamadi" hatasında Ollama'yı başlatın; "GEMINI_API_KEY ortam degiskeni bulunamadi" hatasında anahtarı tanımlayın ya da model kutusundan yerel modeli seçin.
 ## Kullanım
 
 | İşlem | Kısayol |
