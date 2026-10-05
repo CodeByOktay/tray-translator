@@ -1,0 +1,29 @@
+# Sanal ortamlar
+.venv/
+.venv-eski/
+
+# Python onbellegi
+__pycache__/
+*.py[cod]
+
+# PyInstaller ciktilari (derlenmis .exe depoya girmez)
+build/
+dist/
+
+# Editor ayarlari
+.idea/
+.vscode/
+
+# Kisisel veri: ceviri arsivi ve calisma kayitlari
+logs/
+gecmis/
+history/
+
+# Gizli ayar dosyalari
+.env
+.env.*
+*.pem
+*.key
+
+# Eski pip freeze ciktisi; bagimliliklarin kaynagi pyproject.toml + uv.lock
+requirements.txt
