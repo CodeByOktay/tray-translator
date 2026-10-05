@@ -43,6 +43,14 @@ pyinstaller   (yalnızca .exe derlemek için, geliştirme bağımlılığı)
 
 ## Kurulum
 
+**0. uv kurulu değilse kur**
+
+```powershell
+winget install --id=astral-sh.uv -e
+```
+
+Kurulumdan sonra terminali yeniden açın ve `uv --version` ile doğrulayın. Diğer kurulum yolları için [uv belgelerine](https://docs.astral.sh/uv/getting-started/installation/) bakın.
+
 **1. Depoyu al ve ortamı kur**
 
 ```powershell
@@ -87,6 +95,8 @@ Anahtar yalnızca bu ortam değişkeninden okunur; koda ya da depodaki bir dosya
 ```powershell
 uv run main.py
 ```
+
+Uygulama açıldığında model kutusunda bulut sağlayıcı (`Cloud - Gemini Flash`) seçili gelir. API anahtarı tanımlamadıysanız çeviri "GEMINI_API_KEY ortam degiskeni bulunamadi" hatası verir; kutudan `Local - <model-adı>` seçeneğini seçin.
 
 Konsol penceresi istemiyorsanız:
 
