@@ -63,7 +63,7 @@ uv sync
 
 **2. Yerel modeli indir**
 
-Yerel çeviri için Ollama'da kurulu herhangi bir model kullanılabilir. Varsayılan `gemma3:1b`:
+Yerel çeviri için Ollama'da kurulu herhangi bir model kullanılabilir; seçim size kalmış. Önerilen ve varsayılan model `gemma3:1b` (küçük ve hızlı):
 
 ```powershell
 ollama pull gemma3:1b
@@ -90,13 +90,19 @@ Değişkenin okunabilmesi için terminali ve editörü yeniden başlatın.
 
 Anahtar yalnızca bu ortam değişkeninden okunur; koda ya da depodaki bir dosyaya yazılmaz. Anahtar tanımlı değilse yerel (Ollama) sağlayıcı yine çalışır.
 
+Hangi Gemini modelinin kullanılacağı size kalmış. Önerilen ve varsayılan model `gemini-3.6-flash`; başka bir model için adını `GEMINI_MODEL` ortam değişkenine yazın:
+
+```powershell
+[Environment]::SetEnvironmentVariable("GEMINI_MODEL", "<model-adı>", "User")
+```
+
 **4. Çalıştır**
 
 ```powershell
 uv run main.py
 ```
 
-Uygulama açıldığında model kutusunda bulut sağlayıcı (`Cloud - Gemini Flash`) seçili gelir. API anahtarı tanımlamadıysanız çeviri "GEMINI_API_KEY ortam degiskeni bulunamadi" hatası verir; kutudan `Local - <model-adı>` seçeneğini seçin.
+Uygulama açıldığında model kutusunda bulut sağlayıcı (`Cloud - <model-adı>`) seçili gelir. API anahtarı tanımlamadıysanız çeviri "GEMINI_API_KEY ortam degiskeni bulunamadi" hatası verir; kutudan `Local - <model-adı>` seçeneğini seçin.
 
 Konsol penceresi istemiyorsanız:
 

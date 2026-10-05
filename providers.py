@@ -12,6 +12,9 @@ Baska hicbir dosyaya dokunmak gerekmez.
 Gemini icin onkosul:
     GEMINI_API_KEY ortam degiskeni tanimli olmali.
     Anahtar: https://aistudio.google.com  -> Get API key
+
+Gemini modeli GEMINI_MODEL ortam degiskeninden okunur; tanimli degilse
+gemini-3.6-flash kullanilir.
 """
 
 import json
@@ -28,6 +31,11 @@ from engine import (
     build_prompt,
     translate,
 )
+
+DEFAULT_GEMINI_MODEL = "gemini-3.6-flash"
+# Hangi Gemini modelinin kullanilacagi kullaniciya birakilir; ad ortam
+# degiskeninden gelir.
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "").strip() or DEFAULT_GEMINI_MODEL
 
 GEMINI_ENDPOINT = (
     "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
@@ -77,7 +85,7 @@ class GeminiTranslator:
 
     def __init__(
         self,
-        model: str = "gemini-3.6-flash",
+        model: str = GEMINI_MODEL,
         terms: dict[str, str] | None = None,
         timeout: int = 30,
     ) -> None:
@@ -170,10 +178,10 @@ class GeminiTranslator:
 # aranmaz ve anahtar yoksa bile yerel ceviri sorunsuz calisir.
 PROVIDERS: dict[str, Callable[[], Translator]] = {
     f"Local - {MODEL}": lambda: OllamaTranslator(MODEL),
-    "Cloud - Gemini Flash": lambda: GeminiTranslator("gemini-3.6-flash"),
+    f"Cloud - {GEMINI_MODEL}": lambda: GeminiTranslator(GEMINI_MODEL),
 }
 
-DEFAULT_PROVIDER = "Cloud - Gemini Flash"
+DEFAULT_PROVIDER = f"Cloud - {GEMINI_MODEL}"
 
 
 def get_translator(name: str) -> Translator:
