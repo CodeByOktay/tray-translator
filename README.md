@@ -28,6 +28,7 @@ Ekran görüntüsü ileride eklenecek.
 ## Gereksinimler
 
 - Windows 10 / 11
+- [Git](https://git-scm.com) (depoyu indirmek için; ZIP olarak indirecekseniz gerekmez)
 - [uv](https://docs.astral.sh/uv/) (Python'u ve paketleri o kurar)
 - Python 3.13 veya üstü (bilgisayarda yoksa uv kendisi indirir)
 - [Ollama](https://ollama.com) (yerel çeviri için)
@@ -43,13 +44,25 @@ pyinstaller   (yalnızca .exe derlemek için, geliştirme bağımlılığı)
 
 ## Kurulum
 
-**0. uv kurulu değilse kur**
+**0. Gerekli araçları kur**
+
+Kurulu olanları atlayın:
 
 ```powershell
+winget install --id=Git.Git -e
 winget install --id=astral-sh.uv -e
+winget install --id=Ollama.Ollama -e
 ```
 
-Kurulumdan sonra terminali yeniden açın ve `uv --version` ile doğrulayın. Diğer kurulum yolları için [uv belgelerine](https://docs.astral.sh/uv/getting-started/installation/) bakın.
+Kurulumdan sonra terminali yeniden açın ve doğrulayın:
+
+```powershell
+git --version
+uv --version
+ollama --version
+```
+
+Ollama yalnızca yerel çeviri için gerekir; sadece bulut sağlayıcıyı kullanacaksanız kurmayabilirsiniz. Diğer kurulum yolları için [uv belgelerine](https://docs.astral.sh/uv/getting-started/installation/) ve [ollama.com](https://ollama.com) adresine bakın.
 
 **1. Depoyu al ve ortamı kur**
 
@@ -58,6 +71,8 @@ git clone https://github.com/CodeByOktay/tray-translator.git
 cd tray-translator
 uv sync
 ```
+
+Git kullanmak istemiyorsanız GitHub sayfasındaki **Code → Download ZIP** ile indirip klasörü açın ve içinde `uv sync` çalıştırın.
 
 `uv sync`, proje klasöründe bir `.venv` oluşturur ve kilit dosyasındaki sürümleri kurar. Ortamı elle etkinleştirmek gerekmez; komutlar `uv run` ile çalıştırılır.
 
